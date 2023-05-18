@@ -1,5 +1,21 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Build with
+
+- Next Js, React Js, Css, Typescript
+- React Hooks: useState
+- react-icons, chakra-ui
+
+## Features
+
+- Add todo
+- Clear all completed todos
+- Toggle todo
+- Remove todo ( coming soon )
+- Update todo ( coming soon )
+- Search Todo ( coming soon )
+- Filter Todo ( coming soon )
+
 ## Getting Started
 
 First, run the development server:
