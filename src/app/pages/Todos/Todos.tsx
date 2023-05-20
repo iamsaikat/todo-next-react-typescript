@@ -1,14 +1,9 @@
 import { useState } from "react";
-import {
-  Flex,
-  Heading,
-  Stack,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { Todo } from "./todo.type";
+import { Todo } from "./Todo.type";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
+import { Box, Container, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 export default function Todos() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -37,35 +32,43 @@ export default function Todos() {
   };
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack
-        spacing={4}
-        w={"full"}
-        maxW={"md"}
-        bg={useColorModeValue("white", "gray.700")}
-        rounded={"xl"}
-        boxShadow={"lg"}
-        p={6}
-        my={12}
+    <Container component="main" maxWidth={false}  sx={{
+      minHeight: '90vh',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+      <Box
+        sx={{
+          width: '40%',
+          boxShadow: 3,
+          borderRadius: 2,
+          px: 4,
+          py: 4,
+          display: "flex",
+          flexDirection: "column",
+          color: "black"
+        }}
       >
-        <Heading lineHeight={1.1} fontSize={{ base: "2xl", md: "3xl" }}>
+        <Typography sx={{
+          fontSize: '24px',
+          fontWeight: '500',
+          color: grey[800]
+        }}>
           Create a Todo
-        </Heading>
-        <Text
-          fontSize={{ base: "sm", sm: "md" }}
-          color={useColorModeValue("gray.800", "gray.400")}
-        >
+        </Typography>
+        <Typography sx={{
+          fontSize: '18px',
+          fontWeight: '400',
+          color: grey[400]
+        }}>
           Write things here so you dont forget
-        </Text>
-        <AddTodo onAddTodo={addTodo} onClearCompleted={handleClearCompleted} />
-
-        <TodoList todos={todos} onToggleTodo={handleToggle} />
-      </Stack>
-    </Flex>
+        </Typography>
+        <Box sx={{ mt: 2 }}>
+          <AddTodo onAddTodo={addTodo} onClearCompleted={handleClearCompleted} />
+          <TodoList todos={todos} onToggleTodo={handleToggle} />
+        </Box>
+      </Box>
+    </Container>
   );
 }

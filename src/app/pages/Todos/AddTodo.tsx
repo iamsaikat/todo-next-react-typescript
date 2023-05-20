@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
-import { FormControl, Flex, Input, IconButton } from "@chakra-ui/react";
 import { MdAddCircle, MdClearAll } from "react-icons/md";
-import { AddTodo, ClearCompletedTodos } from "./todo.type";
+import { AddTodo, ClearCompletedTodos } from "./Todo.type";
+import { Box, Button, FormControl, TextField } from "@mui/material";
 
 interface IAddTodoProps {
   onAddTodo: AddTodo;
@@ -30,36 +30,57 @@ export default function AddTodo({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Flex align={"center"} justify={"space-between"}>
-        <FormControl id="title">
-          <Input
-            placeholder="Do Homework"
-            _placeholder={{ color: "gray.500" }}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <FormControl fullWidth>
+          <TextField
+            id="title"
+            name="title"
+            label="Do Homework"
             type="text"
+            size="small" 
+            variant="outlined"
             onChange={formik.handleChange}
             value={formik.values.title}
           />
         </FormControl>
-        <IconButton
-          type="submit"
-          aria-label="Add Todo"
-          bg={"blue.400"}
-          color={"white"}
-          _hover={{
-            bg: "blue.500",
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
           }}
-          ml={2}
-          disabled={formik.values.title.length == 0}
-          icon={<MdAddCircle />}
-        ></IconButton>
-        <IconButton
-          aria-label="Clear All Completed"
-          type="button"
-          ml={2}
-          onClick={() => handleClearCompleted()}
-          icon={<MdClearAll />}
-        ></IconButton>
-      </Flex>
+        >
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled={formik.values.title.length == 0}
+            startIcon={<MdAddCircle />}
+            sx={{
+              ml: 1,
+            }}
+          >
+            Add
+          </Button>
+          <Button
+            type="button"
+            variant="outlined"
+            color={'warning'}
+            onClick={() => handleClearCompleted()}
+            startIcon={<MdClearAll />}
+            sx={{
+              ml: 1,
+            }}
+          >
+            Clear
+          </Button>
+        </Box>
+      </Box>
     </form>
   );
 }

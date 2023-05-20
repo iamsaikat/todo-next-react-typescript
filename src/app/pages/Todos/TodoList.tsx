@@ -1,14 +1,16 @@
+import { MdCheckCircle, MdTimer, MdCheckCircleOutline } from "react-icons/md";
+import { RiEditCircleLine } from "react-icons/ri";
+import { Todo, ToggleTodo } from "./Todo.type";
 import {
-  Flex,
-  ListIcon,
-  ListItem,
-  Stack,
-  List,
-  Text,
+  Box,
   IconButton,
-} from "@chakra-ui/react";
-import { MdCheckCircle, MdTimer, MdDone, MdClose } from "react-icons/md";
-import { Todo, ToggleTodo } from "./todo.type";
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+} from "@mui/material";
+import { green, grey } from "@mui/material/colors";
 
 interface ITodoListProps {
   todos: Todo[];
@@ -21,36 +23,40 @@ export default function TodoList({ todos, onToggleTodo }: ITodoListProps) {
   };
 
   return (
-    <Stack>
-      <List>
-        {todos.map((todo) => (
-          <ListItem my={2} key={todo.id}>
-            <Flex align={"center"} justify={"space-between"}>
-              <Flex align={"center"}>
-                <ListIcon
-                  as={todo.completed ? MdCheckCircle : MdTimer}
-                  color={todo.completed ? "green.500" : "gray.500"}
-                />
-                <Text decoration={todo.completed ? "line-through" : "none"}>
-                  {todo.title}
-                </Text>
-              </Flex>
-              <IconButton
-                aria-label="Toggle"
-                type="button"
-                bg={todo.completed ? "red.400" : "green.400"}
-                _hover={{
-                  bg: todo.completed ? "red.500" : "green.500",
-                }}
-                color={"white"}
-                size="sm"
-                onClick={() => handleToggle(todo.id)}
-                icon={todo.completed ? <MdClose /> : <MdDone />}
-              ></IconButton>
-            </Flex>
-          </ListItem>
-        ))}
-      </List>
-    </Stack>
+    <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+      {todos.map((todo) => (
+        <ListItem
+          key={todo.id}
+          secondaryAction={
+            <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2
+            }}>
+              <IconButton edge="end" aria-label="edit" color="primary" onClick={() => {}}>
+                <RiEditCircleLine />
+              </IconButton>
+              <IconButton edge="end" aria-label="done" color="secondary" onClick={() => handleToggle(todo.id)}>
+                <MdCheckCircleOutline />
+              </IconButton>
+            </Box>
+          }
+          disablePadding
+        >
+          <ListItemIcon sx={{
+            color: todo.completed ? green[500] : grey[500]
+          }}>
+            {todo.completed ? <MdCheckCircle /> : <MdTimer />}
+          </ListItemIcon>
+          <ListItemText
+            sx={{
+              textDecoration: todo.completed ? "line-through" : "none",
+            }}
+            id={todo.id.toString()}
+            primary={todo.title}
+          />
+        </ListItem>
+      ))}
+    </List>
   );
 }

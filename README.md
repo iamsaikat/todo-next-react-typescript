@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 - Next Js, React Js, Css, Typescript
 - React Hooks: useState
-- react-icons, chakra-ui
+- react-icons, Material UI
 
 ## Features
 
@@ -13,9 +13,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Toggle todo
 - Remove todo ( coming soon )
 - Update todo ( coming soon )
-- Search Todo ( coming soon )
-- Filter Todo ( coming soon )
-
+- Redux ( coming soon )
 ## Getting Started
 
 First, run the development server:
